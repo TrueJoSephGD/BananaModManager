@@ -257,16 +257,16 @@ namespace BananaModManager.Loader.IL2Cpp
                             switch (mode)
                             {
                                 case "Story":
-                                    modeName = $"In Story Mode: {GameObject.Find("Text_world").GetComponent<RubyTextMeshProUGUI>().m_text}";
+                                    modeName = $"In Story Mode: {GameObject.Find("Text_world").GetComponent<RubyTextMeshProUGUI>().text}";
                                     break;
                                 case "Challenge":
-                                    modeName = $"In {GameObject.Find("Text_world").GetComponent<RubyTextMeshProUGUI>().m_text}";
+                                    modeName = $"In {GameObject.Find("Text_world").GetComponent<RubyTextMeshProUGUI>().text}";
                                     break;
                                 case "Practice":
                                     modeName = "In Practice Mode:";
                                     break;
                                 case "TimeAttack":
-                                    modeName = $"Ranking Challenge: {GameObject.Find("Text_world").GetComponent<RubyTextMeshProUGUI>().m_text}";
+                                    modeName = $"Ranking Challenge: {GameObject.Find("Text_world").GetComponent<RubyTextMeshProUGUI>().text}";
                                     break;
                                 case "Reverse":
                                     modeName = "In Reverse Mode:";
