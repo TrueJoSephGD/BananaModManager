@@ -204,58 +204,55 @@ namespace BananaModManager.Loader.IL2Cpp
             Object.DontDestroyOnLoad(obj);
 
             ClassInjector.RegisterTypeInIl2Cpp<CodeRunner>();
-            obj.AddComponent(Il2CppType.Of<CodeRunner>());
 
-            var priorityCheck = 0;
+            var runner = new CodeRunner(obj.AddComponent(Il2CppType.Of<CodeRunner>()).Pointer);
+            int priorityCheck = 0;
             while (priorityCheck < 6)
             {
                 // Go through each mod
                 foreach (var mod in _mods)
                 {
-                    // If not the correct priority
-                    if (priorityCheck != Convert.ToInt32(mod.Info.Priority))
-                        continue;
 
-                    // Register the types
-                    if (mod.Types != null)
+                    if (priorityCheck == Convert.ToInt32(mod.Info.Priority))
                     {
-                        foreach (var usedType in mod.Types)
+                        // Register the types
+                        if (mod.Types != null)
                         {
-                            ClassInjector.RegisterTypeInIl2Cpp(usedType);
+                            foreach (var usedType in mod.Types)
+                            {
+                                ClassInjector.RegisterTypeInIl2Cpp(usedType);
+                            }
                         }
-                    }
 
-                    // Check each class if there's an assembly
-                    var assembly = mod.GetAssembly();
-
-                    if (assembly == null)
-                        continue;
-
-                    // Go through each class
-                    foreach (var type in assembly.GetTypes())
-                    {
-                        // Only look for one that's called "Main"
-                        if (type.Name != "Main")
+                        // Check each class if there's an assembly
+                        if (mod.GetAssembly() == null)
                             continue;
 
-                        // Add it to the code runner
-                        type.GetMethod("OnModStart")?.Invoke(null, null);
+                        foreach (var type in mod.GetAssembly().GetTypes())
+                        {
+                            // Only look for one that's called "Main"
+                            if (type.Name != "Main")
+                                continue;
 
-                        var update = type.GetMethod("OnModUpdate");
-                        if (update != null)
-                            UpdateMethods.Add(update);
+                            // Add it to the code runner
+                            type.GetMethod("OnModStart")?.Invoke(null, null);
 
-                        var fixedUpdate = type.GetMethod("OnModFixedUpdate");
-                        if (fixedUpdate != null)
-                            FixedUpdateMethods.Add(fixedUpdate);
+                            var update = type.GetMethod("OnModUpdate");
+                            if (update != null)
+                                UpdateMethods.Add(update);
 
-                        var lateUpdate = type.GetMethod("OnModLateUpdate");
-                        if (lateUpdate != null)
-                            LateUpdateMethods.Add(lateUpdate);
+                            var fixedUpdate = type.GetMethod("OnModFixedUpdate");
+                            if (fixedUpdate != null)
+                                FixedUpdateMethods.Add(fixedUpdate);
 
-                        var gui = type.GetMethod("OnModGUI");
-                        if (gui != null)
-                            GUIMethods.Add(gui);
+                            var lateUpdate = type.GetMethod("OnModLateUpdate");
+                            if (lateUpdate != null)
+                                LateUpdateMethods.Add(lateUpdate);
+
+                            var gui = type.GetMethod("OnModGUI");
+                            if (gui != null)
+                                GUIMethods.Add(gui);
+                        }
                     }
                 }
                 priorityCheck++;

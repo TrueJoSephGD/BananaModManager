@@ -278,6 +278,12 @@ public class Update
             var sourceDirectory = Path.Combine(loaderDir, monoDir);
             var destinationDirectory = App.PathConvert(monoDir);
 
+
+            const string harmonyFile = "0Harmony.dll";
+            File.Copy(
+                Path.Combine(loaderDir, harmonyFile),
+                App.PathConvert(harmonyFile), true);
+
             // Get all files in the source directory and its subdirectories
             var files = Directory.GetFiles(sourceDirectory, "*.*", SearchOption.AllDirectories);
 

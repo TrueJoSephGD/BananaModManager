@@ -77,11 +77,11 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Assembly-CSharp">
-      <HintPath>E:\SteamLibrary\steamapps\common\SMBBBHD\SMBBBHD_Data\Managed\Assembly-CSharp.dll</HintPath>
+      <HintPath>..\..\References\Assembly-CSharp.dll</HintPath>
     </Reference>
     <Reference Include="Il2Cppmscorlib, Version=3.7.1.6, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>E:\SteamLibrary\steamapps\common\smbbm\managed\Il2Cppmscorlib.dll</HintPath>
+      <HintPath>..\..\References\Il2Cppmscorlib.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -92,13 +92,13 @@
     <Reference Include="System.Xml" />
     <Reference Include="UnhollowerBaseLib, Version=0.4.15.4, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>E:\SteamLibrary\steamapps\common\smbbm\managed\UnhollowerBaseLib.dll</HintPath>
+      <HintPath>..\..\References\UnhollowerBaseLib.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine">
-      <HintPath>E:\SteamLibrary\steamapps\common\SMBBBHD\SMBBBHD_Data\Managed\UnityEngine.dll</HintPath>
+      <HintPath>..\..\References\UnityEngine.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.CoreModule">
-      <HintPath>E:\SteamLibrary\steamapps\common\SMBBBHD\SMBBBHD_Data\Managed\UnityEngine.CoreModule.dll</HintPath>
+      <HintPath>..\..\References\UnityEngine.CoreModule.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>

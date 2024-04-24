@@ -62,7 +62,9 @@ public static class Games
             // Practice Mod (IL Retry but better)
             "AE4ED268C48C4E4522ED533AD6DA4FF2BA205AB8FCA440F05F92144D832BD311",
             // NoPromptRewrite (NoPrompt but better)
-            "769C6D614C8CE7E97272B9D59919A95F32889CE30DE5CD3898316DA1DDCD3DC7"
+            "769C6D614C8CE7E97272B9D59919A95F32889CE30DE5CD3898316DA1DDCD3DC7",
+            // Custom Character Loader (Finally fixed it)
+            "D2587B4CF38C13DF3E7472342E0A5D51DE40DD3D91A7D6F235D2E5AA9C333031"
         },
         WhitelistNames = new List<string>
         {
@@ -81,7 +83,8 @@ public static class Games
             "BMOnline.Mod.dll",
             "DeadLineReq.dll",
             "PracticeMod.dll",
-            "NoPromptRewrite.dll"
+            "NoPromptRewrite.dll",
+            "CustomCharacterLoader.dll"
         }
     };
     public static Game Paperball = new()

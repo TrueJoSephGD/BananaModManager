@@ -11,7 +11,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BananaModManager.Loader.IL2
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "BananaModManager.Detours", "BananaModManager.Detours\BananaModManager.Detours.vcxproj", "{A4906490-6875-482E-922C-3C7CC61A14B5}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BananaModManager.NewUI", "BananaModManager.NewUI\BananaModManager.NewUI.csproj", "{2C5F5D47-B41A-4274-BF73-3AC6F0652375}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BananaModManager.NewUI", "BananaModManager.NewUI\BananaModManager.NewUI.csproj", "{2C5F5D47-B41A-4274-BF73-3AC6F0652375}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BananaModManager.LoaderCompiler", "BananaModManager.LoaderCompiler\BananaModManager.LoaderCompiler.csproj", "{13BA1D29-4213-45D8-A2EE-4E8BFDCFCA58}"
 EndProject
@@ -76,6 +76,7 @@ Global
 		{7CAE01B5-E442-4780-9215-1AA859126FA3}.Release|x86.ActiveCfg = Release|Any CPU
 		{7CAE01B5-E442-4780-9215-1AA859126FA3}.Release|x86.Build.0 = Release|Any CPU
 		{A4906490-6875-482E-922C-3C7CC61A14B5}.Debug|Any CPU.ActiveCfg = Debug|Win32
+		{A4906490-6875-482E-922C-3C7CC61A14B5}.Debug|Any CPU.Build.0 = Debug|Win32
 		{A4906490-6875-482E-922C-3C7CC61A14B5}.Debug|ARM64.ActiveCfg = Debug|x64
 		{A4906490-6875-482E-922C-3C7CC61A14B5}.Debug|ARM64.Build.0 = Debug|x64
 		{A4906490-6875-482E-922C-3C7CC61A14B5}.Debug|x64.ActiveCfg = Debug|x64
