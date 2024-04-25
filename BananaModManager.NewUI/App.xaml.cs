@@ -135,6 +135,20 @@ public partial class App : Application
         // Create the main window
         MainWindow = new MainWindow();
         MainWindow.Activate();
+        if (arguments.Length > 1)
+        {
+            if (arguments[1] == "--postUpdate")
+            {
+                try
+                {
+                    Update.UpdateModLoader();
+                }
+                catch (Exception e)
+                {
+                    MessageBox.Show("Failed to automatically update the mod loader. Ensure a valid directory is set then try again.");
+                }
+            }
+        }
         _mutex.ReleaseMutex();
     }
 
