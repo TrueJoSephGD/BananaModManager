@@ -30,4 +30,9 @@ public class ManagerConfig
         /// Modifies the layout to look a bit more like the original mod manager
         /// </summary>
         public bool LegacyLayout { get; set; } = false;
+
+        /// <summary>
+        /// Allows for multiple profiles to be created - they save to BananaModManager.json on save/save and play.
+        /// </summary>
+        public string ProfileName {  get; set; } = string.Empty;
 }

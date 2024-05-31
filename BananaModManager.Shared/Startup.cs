@@ -34,7 +34,7 @@ public static class Startup
 
     public static void StartModLoader(out List<Mod> mods, out GameConfig gameConfig, out Game currentGame)
     {
-        Mods.Load(out gameConfig, "");
+        Mods.Load(out gameConfig, "", "BananaModManager.json");
 
         var activeMods = gameConfig.ActiveMods;
 

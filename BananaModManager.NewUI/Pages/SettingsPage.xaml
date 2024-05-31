@@ -92,6 +92,47 @@
                 </toolkit:SettingsExpander.Items>
             </toolkit:SettingsExpander>
 
+
+            <toolkit:SettingsCard x:Name="ProfileSelector" Description="Select a profile to load the associated mods and settings from" Header="Selected Profile" Style="{StaticResource SettingsCardStyle}">
+                <toolkit:SettingsCard.HeaderIcon>
+                    <FontIcon Glyph="&#xE716;" />
+                </toolkit:SettingsCard.HeaderIcon>
+                <StackPanel Orientation="Horizontal" VerticalAlignment="Bottom" Margin="0,8,0,0">
+                    <ComboBox x:Name="ComboProfiles" AutomationProperties.AutomationId="themeModeComboBox" Margin="0,0,8,0" SelectionChanged="ComboProfiles_SelectionChanged">
+                    </ComboBox>
+
+                <Button x:Name="ButtonAddProfile" Content="New Profile" Margin="0,0,8,0" Style="{StaticResource AccentButtonStyle}">
+                    <Button.Flyout>
+                        <Flyout>
+                                <StackPanel>
+                                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Bottom">
+                                        <TextBox Width="256" x:Name="TextBoxProfileName" PlaceholderText="Profile Name"  SelectionHighlightColor="#7F6E00" />
+                                    </StackPanel>
+                                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Bottom">
+                                        <Button Content="Create" Margin="0,8,0,0" Click="ButtonCreateProfile_Click" />
+                                        <Button Content="Start As Copy" Margin="0,8,0,0" Click="ButtonStartFromCopy_Click" />
+                                    </StackPanel>
+                                </StackPanel>
+                        </Flyout>
+                    </Button.Flyout>
+                </Button>
+
+                    <Button x:Name="ButtonRemoveProfile" Content="Remove Profile" Margin="0,0,8,0" Click="ButtonAddProfile_Click" Style="{StaticResource AccentButtonStyle}">
+                        <Button.Flyout>
+                            <Flyout>
+                                <StackPanel>
+                                    <TextBlock Style="{ThemeResource BaseTextBlockStyle}" Text="The selected game will be removed. Are you sure?" Margin="0,0,0,12" />
+                                    <Button Click="ButtonProfileRemoveYes_OnClick" Content="Yes!" />
+                                </StackPanel>
+                            </Flyout>
+                        </Button.Flyout>
+                    </Button>
+                    
+                </StackPanel>
+
+
+            </toolkit:SettingsCard>
+
             <toolkit:SettingsCard x:Name="CardOneClick" Description="Enables One-Click support on GameBanana" Header="Enable GameBanana One-Click support" Style="{StaticResource SettingsCardStyle}">
                 <toolkit:SettingsCard.HeaderIcon>
                     <FontIcon Glyph="&#xE8B0;" />

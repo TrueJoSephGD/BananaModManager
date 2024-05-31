@@ -270,7 +270,7 @@ namespace BananaModManager.Loader.IL2Cpp
             {
                 _gameConfig.SpeedrunMode = !_gameConfig.SpeedrunMode;
 
-                Mods.Save(_gameConfig, "");
+                Mods.Save(_gameConfig, "", "BananaModManager.json");
                 Process.Start(new ProcessStartInfo
                 {
                     FileName = $"steam://rungameid/{_currentGame.SteamAppID}",

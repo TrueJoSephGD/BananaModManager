@@ -7,6 +7,8 @@ using Microsoft.UI;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Media;
+using System.Collections.Generic;
+using static System.Net.WebRequestMethods;
 
 namespace BananaModManager;
 
@@ -36,6 +38,30 @@ public sealed partial class SettingsPage : Page
         // Set the profiles list
         ListViewProfiles.ItemsSource = App.ManagerConfig.GameDirectories;
         ListViewProfiles.SelectedIndex = App.ManagerConfig.CurrentProfileIndex;
+
+        // Load ComboxProfiles Options
+        if (App.ManagerConfig.GameDirectories[App.ManagerConfig.CurrentProfileIndex] != "")
+        {
+
+            ComboProfiles.Items.Add("Default");
+            List<string> profileList = new List<string>();
+            string[] profiles = Directory.GetFiles(App.ManagerConfig.GameDirectories[App.ManagerConfig.CurrentProfileIndex] + "\\mods", "*.json");
+            foreach (string profile in profiles)
+            {
+                if (!profile.Contains("BananaModManager.json"))
+                {
+                    ComboProfiles.Items.Add(profile.Substring(profile.LastIndexOf("\\") + 1, (profile.Substring(profile.LastIndexOf("\\") + 1).Length - 5)));
+                }
+            }
+            if (App.ManagerConfig.ProfileName != "")
+            {
+                ComboProfiles.PlaceholderText = (App.ManagerConfig.ProfileName.Substring(0, App.ManagerConfig.ProfileName.Length - 5)); 
+            }
+            else
+            {
+                ComboProfiles.PlaceholderText = "Default";
+            }
+        }
 
         // Enable or disable the buttons there
         SetListViewButtons();
@@ -232,7 +258,7 @@ public sealed partial class SettingsPage : Page
         {
             foreach (var game in Games.List)
             {
-                if (File.Exists(Path.Combine(gameDir, $"{game.ExecutableName}.exe")))
+                if (System.IO.File.Exists(Path.Combine(gameDir, $"{game.ExecutableName}.exe")))
                 {
                     thisGame = game;
                     break;
@@ -244,5 +270,57 @@ public sealed partial class SettingsPage : Page
         var isDefaultGame = thisGame == Games.Default;
         TextGameDirectoryStatus.Text = isDefaultGame ? "No game is detected!" : $"\"{thisGame.Title}\" is detected!";
         TextGameDirectoryStatus.Foreground = isDefaultGame ? new SolidColorBrush(Colors.Red) : new SolidColorBrush(Colors.Lime);
+    }
+
+    private void ComboProfiles_SelectionChanged(object sender, SelectionChangedEventArgs e)
+    {
+        App.ManagerConfig.ProfileName = ComboProfiles.SelectedItem.ToString() + ".json";
+        App.SaveManagerConfig();
+        App.Restart();
+
+    }
+
+    private void ButtonAddProfile_Click(object sender, RoutedEventArgs e)
+    {
+
+    }
+
+    private void ButtonCreateProfile_Click(object sender, RoutedEventArgs e)
+    {
+        if (ComboProfiles.Items.Contains(TextBoxProfileName.Text))
+        {
+            ModernMessageBox.Show("Check that the profile name is unique and try again.", "Please submit a new profile name!","Got it, no repeats!");
+            return;
+        }
+
+        App.ManagerConfig.ProfileName = TextBoxProfileName.Text + ".json";
+        App.SaveManagerConfig();
+        App.Restart();
+    }
+    
+    private void ButtonProfileRemoveYes_OnClick(object sender, RoutedEventArgs e) 
+    {
+        if (App.ManagerConfig.ProfileName == "Default.json" || App.ManagerConfig.ProfileName == "")
+        {
+            ModernMessageBox.Show("You cannot delete the default profile.", "Wait a minute, that's the default profile!", "Oops!");
+            return;
+        }
+        System.IO.File.Delete(App.ManagerConfig.GameDirectories[ListViewProfiles.SelectedIndex] + "\\mods\\" + App.ManagerConfig.ProfileName);
+        App.ManagerConfig.ProfileName = "";
+        App.SaveManagerConfig();
+        App.Restart();
+    }
+
+    private void ButtonStartFromCopy_Click(object sender, RoutedEventArgs e)
+    {
+        if (ComboProfiles.Items.Contains(TextBoxProfileName.Text))
+        {
+            ModernMessageBox.Show("Check that the profile name is unique and try again.", "Please submit a new profile name!", "Got it, no repeats!");
+            return;
+        }
+        App.ManagerConfig.ProfileName = TextBoxProfileName.Text + ".json";
+        App.SaveManagerConfig();
+        App.SaveGameConfig();
+        App.Restart();
     }
 }

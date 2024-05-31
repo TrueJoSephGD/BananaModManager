@@ -19,10 +19,10 @@ public static class Mods
     /// <summary>
     ///     Loads all necessary data about all the mods
     /// </summary>
-    public static void Load(out GameConfig gameConfig, string gameDirectory)
+    public static void Load(out GameConfig gameConfig, string gameDirectory, string profileName)
     {
         // Load the config file
-        gameConfig = LoadGameConfig(gameDirectory);
+        gameConfig = LoadGameConfig(gameDirectory, profileName);
         gameConfig.ActiveMods ??= new List<string>();
 
         // Get the mods folder
@@ -149,14 +149,14 @@ public static class Mods
     ///     Loads all the game config stuff.
     /// </summary>
     /// <returns>Settings associated with the specific game.</returns>
-    public static GameConfig LoadGameConfig(string gameDirectory)
+    public static GameConfig LoadGameConfig(string gameDirectory, string profileName)
     {
         GameConfig gameConfig;
         // Load and deserialize the mod loader config file if it exists
         // If it doesn't just create an empty one
         try
         {
-            var configFilePath = Path.Combine(gameDirectory, Folder, ConfigFile);
+            var configFilePath = Path.Combine(gameDirectory, Folder, profileName);
             if (File.Exists(configFilePath))
                 gameConfig = File.ReadAllText(configFilePath).Deserialize<GameConfig>() ??
                              new GameConfig();
@@ -176,7 +176,7 @@ public static class Mods
     ///     Saves the user config of the mod manager.
     /// </summary>
     /// <param name="gameConfig">Settings of the mod manager.</param>
-    public static void Save(GameConfig gameConfig, string gameDirectory)
+    public static void Save(GameConfig gameConfig, string gameDirectory, string profileName)
     {
         // Add the configs into it
         foreach (var mod in List.Select(_ => _.Value))
@@ -189,7 +189,8 @@ public static class Mods
 
         // Serialize and save it
         var configJson = gameConfig.Serialize();
-        File.WriteAllText(Path.Combine(gameDirectory, Folder, ConfigFile), configJson);
+        File.WriteAllText(Path.Combine(gameDirectory, Folder, profileName), configJson);
+        File.WriteAllText(Path.Combine(gameDirectory, Folder, "BananaModManager.json"), configJson);
     }
 
     /// <summary>

@@ -4,6 +4,7 @@ using System.IO;
 using System.Threading;
 using BananaModManager.Shared;
 using Microsoft.UI.Xaml;
+using Microsoft.UI.Xaml.Controls;
 using Path = System.IO.Path;
 
 // To learn more about WinUI, the WinUI project structure,
@@ -105,6 +106,10 @@ public partial class App : Application
         {
             var configFile = File.ReadAllText(ManagerConfigFile);
             ManagerConfig = configFile.Deserialize<ManagerConfig>();
+            if (!configFile.Contains("ProfileName"))
+            {
+                ManagerConfig.ProfileName = "";    
+            }
         }
         else
         {
@@ -115,7 +120,7 @@ public partial class App : Application
         if (ManagerConfig.GetGameDirectory() != "")
         {
             var gameConfig = GameConfig;
-            Mods.Load(out gameConfig, ManagerConfig.GetGameDirectory());
+            Mods.Load(out gameConfig, ManagerConfig.GetGameDirectory(), ManagerConfig.ProfileName);
             GameConfig = gameConfig;
         }
 
@@ -155,7 +160,7 @@ public partial class App : Application
     public static void SaveGameConfig()
     {
         if (ManagerConfig.GetGameDirectory() != "")
-            Mods.Save(GameConfig, ManagerConfig.GetGameDirectory());
+            Mods.Save(GameConfig, ManagerConfig.GetGameDirectory(), App.ManagerConfig.ProfileName);
     }
 
     public static void SaveManagerConfig()
