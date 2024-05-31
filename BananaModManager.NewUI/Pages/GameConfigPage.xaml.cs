@@ -72,11 +72,19 @@ public sealed partial class GameConfigPage : Page
     {
         // If unchanged then don't do anything
         if (App.GameConfig.FastRestart == ToggleFastRestart.IsOn)
+        {
             return;
+        }
 
         // Otherwise change the setting
         App.GameConfig.FastRestart = ToggleFastRestart.IsOn;
 
+        // Double check that console window is on
+        if (!App.GameConfig.ConsoleWindow)
+        {
+            App.GameConfig.ConsoleWindow = true;
+            ToggleConsole.IsOn = true;
+        }
         // Save the changes
         App.SaveGameConfig();
     }

@@ -359,3 +359,4 @@ BananaModManager.Shared/AntiCheat.cs
 *.csproj
 BananaModManager.Loader.IL2Cpp/BananaModManager.Loader.IL2Cpp.csproj
 *.zip
+PatchNotes.txt

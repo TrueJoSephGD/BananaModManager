@@ -41,7 +41,7 @@
                 <ToggleSwitch x:Name="ToggleSpeedrunMode" Toggled="ToggleSpeedrunMode_OnToggled"/>
             </toolkit:SettingsCard>
 
-            <toolkit:SettingsCard x:Name="CardFastRestart" Description="When enabled, pressing F11 while the game is open will fast restart the game, toggling Speedrun Mode in the process" Header="Add fast restart keybind to the Speedrun Mode" Style="{StaticResource SettingsCardStyle}">
+            <toolkit:SettingsCard x:Name="CardFastRestart" Description="When enabled, pressing F11 while the game is open will prompt you in the Console Window to swap profiles" Header="Add profile swap keybind" Style="{StaticResource SettingsCardStyle}">
                 <toolkit:SettingsCard.HeaderIcon>
                     <FontIcon Glyph="&#xE765;" />
                 </toolkit:SettingsCard.HeaderIcon>

@@ -12,6 +12,8 @@ using UnhollowerBaseLib;
 using UnhollowerBaseLib.Runtime;
 using UnhollowerRuntimeLib;
 using UnityEngine;
+using UnityEngine.UI;
+using System.Windows.Forms;
 using Console = System.Console;
 using ConsoleColor = System.ConsoleColor;
 using Exception = System.Exception;
@@ -20,6 +22,7 @@ using Math = System.Math;
 using Object = UnityEngine.Object;
 using Version = System.Version;
 using DiscordRPC;
+using System.Runtime.CompilerServices;
 
 namespace BananaModManager.Loader.IL2Cpp
 {
@@ -265,12 +268,29 @@ namespace BananaModManager.Loader.IL2Cpp
             {
                 method.Invoke(null, null);
             }
-            // If F11 is pressed, restart and toggle Speedrun Mode
-            if (AppInput.GetKeyDown(KeyCode.F11) && _gameConfig.FastRestart)
+            // If F11 is pressed, choose a profile in Console and restart
+            if (AppInput.GetKeyDown(KeyCode.F11) && _gameConfig.FastRestart && _gameConfig.ConsoleWindow)
             {
-                _gameConfig.SpeedrunMode = !_gameConfig.SpeedrunMode;
+                bool profileFound = true;
+                string profile = "";
+                string location = Process.GetCurrentProcess().MainModule.FileName.Substring(0, Process.GetCurrentProcess().MainModule.FileName.Length - (_currentGame.ExecutableName.Length + 4)) + "\\mods\\";
 
-                Mods.Save(_gameConfig, "", "BananaModManager.json");
+                Console.WriteLine("Please input the config name:");
+                profile = Console.ReadLine();
+                try
+                {
+                    File.Copy(location + profile + ".json", location + "BananaModManager.json", true);
+                }
+                catch
+                {
+                    Console.BackgroundColor = ConsoleColor.Red;
+                    Console.WriteLine("Config not found.");
+                    Console.BackgroundColor = ConsoleColor.Black;
+                    return;
+                    
+                }
+                Console.BackgroundColor = ConsoleColor.Green;
+                Console.WriteLine("Profile Found!");
                 Process.Start(new ProcessStartInfo
                 {
                     FileName = $"steam://rungameid/{_currentGame.SteamAppID}",
@@ -331,7 +351,7 @@ namespace BananaModManager.Loader.IL2Cpp
                 return;
 
             var style = new GUIStyle();
-            var ratio = Screen.height / 1080f;
+            var ratio = UnityEngine.Screen.height / 1080f;
 
             // Set the initial offset and font size
             style.fontSize = Math.Max(16, (int)(24.0f * ratio));
@@ -339,7 +359,7 @@ namespace BananaModManager.Loader.IL2Cpp
             var offset2 = 160f * ratio;
 
             // Draw the title and mod loader version
-            DrawTextOutline(new Rect(Screen.width - offset.x - offset2 + _modListSlide, offset.y, Screen.width, style.fontSize),
+            DrawTextOutline(new Rect(UnityEngine.Screen.width - offset.x - offset2 + _modListSlide, offset.y, UnityEngine.Screen.width, style.fontSize),
                 $"Loaded Mods (v{LoaderVersion.String}):", (int)Mathf.Ceil(ratio), style);
 
             // Change the font size and add extra offset for the rest
@@ -352,11 +372,11 @@ namespace BananaModManager.Loader.IL2Cpp
             // Draw them all
             for (var i = 0; i < _speedrunList.Count; i++)
             {
-                DrawTextOutline(new Rect(Screen.width - offset.x - offset2 + _modListSlide, offset.y + style.fontSize * i, offset2 - offset.x, style.fontSize),
+                DrawTextOutline(new Rect(UnityEngine.Screen.width - offset.x - offset2 + _modListSlide, offset.y + style.fontSize * i, offset2 - offset.x, style.fontSize),
                     _speedrunList[i], outlineSize, style);
             }
             // Add custom Speedrunner Hash
-            DrawTextOutline(new Rect(Screen.width - offset.x - offset2 + _modListSlide, offset.y + style.fontSize * (_speedrunList.Count + 1), offset2 - offset.x, style.fontSize),
+            DrawTextOutline(new Rect(UnityEngine.Screen.width - offset.x - offset2 + _modListSlide, offset.y + style.fontSize * (_speedrunList.Count + 1), offset2 - offset.x, style.fontSize),
                     SpeedrunHash, outlineSize, style);
 
         }
