@@ -8,6 +8,8 @@ GameBanana Page: [SMB:BBHD](https://gamebanana.com/tools/7464) | [SMB:BM](https:
 
 If you need some mods to use this mod manager with, check Mors' [BananaBlitzHDMods](https://github.com/MorsGames/BananaBlitzHDMods) and [BananaManiaMods](https://github.com/MorsGames/BananaManiaMods) repositories, or iswimfly's [iswimflyBananaManiaMods](https://github.com/iswimfly/iswimflyBananaManiaMods).
 
+If you're having trouble loading mods, check out the [FAQ](https://github.com/MorsGames/BananaModManager/wiki) to see if your issue is listed.
+
 ### Currently Supported Games
 
 - [Super Monkey Ball: Banana Blitz HD](https://store.steampowered.com/app/1061730/Super_Monkey_Ball_Banana_Blitz_HD)
@@ -19,7 +21,7 @@ If you need some mods to use this mod manager with, check Mors' [BananaBlitzHDMo
 - Support for file redirection.
 - Automatic updates for the mods (detect from inside BMM).
 
-If you have a question, or want to help please reach out to me on the [Banana Mania Modding Discord](https://discord.gg/vuZWDMzzye). Make sure to ping `@iswimfly` or `@Mors`, so your message is seen!
+If you have a question, or want to help please reach out to us on the [Banana Mania Modding Discord](https://discord.gg/vuZWDMzzye). Make sure to ping `@iswimfly` or `@Mors`, so your message is seen!
 
 This project is licensed under MIT.
 
