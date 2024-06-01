@@ -121,7 +121,7 @@ namespace BananaModManager.Loader.IL2Cpp
                     {
                         Thread.Sleep(12000);
 
-                        if (_mods.Count > 0 && !_gameConfig.SpeedrunMode || SpeedrunHash != null)
+                        if (_mods.Count > 0 && !_gameConfig.SpeedrunMode)
                         {
                             LeaderboardsDelegateInstance = Dummy;
                             if (_gameConfig.LegacyMode)

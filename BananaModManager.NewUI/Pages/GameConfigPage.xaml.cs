@@ -80,7 +80,7 @@ public sealed partial class GameConfigPage : Page
         App.GameConfig.FastRestart = ToggleFastRestart.IsOn;
 
         // Double check that console window is on
-        if (!App.GameConfig.ConsoleWindow)
+        if (!App.GameConfig.ConsoleWindow && App.GameConfig.FastRestart)
         {
             App.GameConfig.ConsoleWindow = true;
             ToggleConsole.IsOn = true;

@@ -120,7 +120,15 @@ public partial class App : Application
         if (ManagerConfig.GetGameDirectory() != "")
         {
             var gameConfig = GameConfig;
-            Mods.Load(out gameConfig, ManagerConfig.GetGameDirectory(), ManagerConfig.ProfileName);
+            try
+            {
+                Mods.Load(out gameConfig, ManagerConfig.GetGameDirectory(), ManagerConfig.ProfileName);
+            }
+            catch
+            {
+                MessageBox.Show("An error has been found in your mods folder! Please ensure all mods are installed correctly, then try launching again.", "Error!");
+                Process.GetCurrentProcess().Kill();
+            }
             GameConfig = gameConfig;
         }
 
